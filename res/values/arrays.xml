@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="testTargetType">
+        <item name="ios">Apple iOS</item>
+        <item name="wp">Windows Phone</item>
+        <!-- item name="custom">Custom</item -->
+    </string-array>
+	<string-array name="testTargetValues">
+        <item name="ios">ios</item>
+        <item name="wp">wp</item>
+        <item name="custom">custom</item>
+    </string-array>
+	<string-array name="testTargetURL">
+        <item name="ios">http://www.apple.com/library/test/success.html</item>
+        <item name="wp">http://www.msftncsi.com/ncsi.txt</item>
+        <item name="custom"></item>
+    </string-array>
+    <string-array name="testTargetResponse">
+        <item name="ios">&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;</item>
+        <item name="wp">Microsoft NCSI</item>
+        <item name="custom"></item>
+    </string-array>
+</resources>

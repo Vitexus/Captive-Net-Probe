@@ -7,7 +7,6 @@ package cz.s.v.captivesimulator;
 
 import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
-import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;

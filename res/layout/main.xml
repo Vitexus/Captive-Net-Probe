@@ -6,7 +6,7 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <TextView android:id="@+id/result"
-        android:background="#555555"
+              android:background="#555555"
     />
     <TextView
         android:maxLines="10"
@@ -16,8 +16,9 @@
         android:text="@string/app_introduce" />
 
     <WebView  xmlns:android="http://schemas.android.com/apk/res/android"
-          android:id="@+id/webview"
-          android:layout_width="fill_parent"
+              android:id="@+id/webview"
+              android:layout_width="fill_parent"
     />
 
+    
 </TableLayout>

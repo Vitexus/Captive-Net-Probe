@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    
+    <PreferenceCategory android:title="@string/pref_update_setting" >
+
+        <ListPreference
+            android:key="prefTestType"
+            android:entries="@array/testTargetType"
+            android:summary="@string/pref_test_type_summary" 
+            android:entryValues="@array/testTargetValues"
+            android:title="@string/pref_test_type" />
+<!--        
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="prefRepeatTest"
+            android:summary="@string/pref_repeat_test_summary"
+            android:title="@string/pref_repeat_test" >
+        </CheckBoxPreference>
+        
+        <EditTextPreference 
+            android:title="@string/pref_custom_target" 
+            android:summary="@string/pref_custom_target_summary" 
+            android:key="prefUsername"/>
+
+        <EditTextPreference 
+            android:title="@string/pref_custom_response" 
+            android:summary="@string/pref_custom_response_summary" 
+            android:key="prefCustomResponse"/>
+-->                
+        
+    </PreferenceCategory>
+
+</PreferenceScreen>
