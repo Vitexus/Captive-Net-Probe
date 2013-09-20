@@ -1,4 +1,4 @@
-package cz.s.v.captivesimulator;
+package cz.s.v.captivenetprobe;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +14,7 @@ import android.preference.PreferenceManager;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
+import cz.s.v.captivenetprobe.R;
 
 public class TestCaptiveNetwork extends Activity {
 
@@ -130,31 +131,39 @@ public class TestCaptiveNetwork extends Activity {
     }
 
     private void showUserSettings() {
+        int testTypeIndex = 0;
         SharedPreferences sharedPrefs = PreferenceManager
                 .getDefaultSharedPreferences(this);
-        int testTypeIndex = 0;
         String testType = sharedPrefs.getString("prefTestType", "NULL");
+        if (testType.equals("NULL")) {
+            Toast.makeText(getBaseContext(), "Please choose test type ...", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(this, UserSettingActivity.class);
+            startActivityForResult(i, RESULT_SETTINGS);
+        } else {
 
-        StringBuilder builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
 
-        String[] testTypes = getResources().getStringArray(R.array.testTargetType);
-        String[] testTypeValues = getResources().getStringArray(R.array.testTargetValues);
-        String[] testURLs = getResources().getStringArray(R.array.testTargetURL);
-        String[] testResponses = getResources().getStringArray(R.array.testTargetResponse);
+            String[] testTypes = getResources().getStringArray(R.array.testTargetType);
+            String[] testTypeValues = getResources().getStringArray(R.array.testTargetValues);
+            String[] testURLs = getResources().getStringArray(R.array.testTargetURL);
+            String[] testResponses = getResources().getStringArray(R.array.testTargetResponse);
+            String[] testUserAgents = getResources().getStringArray(R.array.testTargetUserAgent);
 
-        for (int i = 0; i < testTypes.length; i++) {
-            if (testType.equals(testTypeValues[i])) {
-                testTypeIndex = i;
+            for (int i = 0; i < testTypes.length; i++) {
+                if (testType.equals(testTypeValues[i])) {
+                    testTypeIndex = i;
+                }
             }
+
+            builder.append("Test Type: " + testTypes[testTypeIndex]);
+            builder.append("\nUser Agent: " + testUserAgents[testTypeIndex]);
+            builder.append("\nTest Target: " + testURLs[testTypeIndex]);
+            builder.append("\nSuccess Response: " + testResponses[testTypeIndex]);
+
+            TextView settingsTextView = (TextView) findViewById(R.id.response);
+
+            settingsTextView.setText(builder.toString());
         }
-
-        builder.append("Test Type: " + testTypes[testTypeIndex]);
-        builder.append("\nTest Target: " + testURLs[testTypeIndex] );
-        builder.append("\nSuccess Response: " + testResponses[testTypeIndex] );
-
-        TextView settingsTextView = (TextView) findViewById(R.id.response);
-
-        settingsTextView.setText(builder.toString());
     }
 
 }

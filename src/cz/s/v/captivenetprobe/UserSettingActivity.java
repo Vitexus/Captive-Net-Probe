@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.s.v.captivesimulator;
+package cz.s.v.captivenetprobe;
 
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
+import cz.s.v.captivenetprobe.R;
 
 /**
  *
@@ -28,12 +29,17 @@ public class UserSettingActivity extends PreferenceActivity {
         addPreferencesFromResource(R.xml.preferences);
 
         preference = (ListPreference) findPreference("prefTestType");
+        String testValue = preference.getValue();
 
-        String[] testTypes = getResources().getStringArray(R.array.testTargetType);
-        String[] testTypeValues = getResources().getStringArray(R.array.testTargetValues);
-        for (int i = 0; i < testTypes.length; i++) {
-            if (preference.getValue().equals(testTypeValues[i])) {
-                preference.setSummary(testTypes[i]);
+        if (testValue == null) {
+            preference.setSummary("Not yet set. Please Choose ...");
+        } else {
+            String[] testTypes = getResources().getStringArray(R.array.testTargetType);
+            String[] testTypeValues = getResources().getStringArray(R.array.testTargetValues);
+            for (int i = 0; i < testTypes.length; i++) {
+                if (testValue.equals(testTypeValues[i])) {
+                    preference.setSummary(testTypes[i]);
+                }
             }
         }
 

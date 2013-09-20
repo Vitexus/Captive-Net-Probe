@@ -15,6 +15,11 @@
         <item name="wp">http://www.msftncsi.com/ncsi.txt</item>
         <item name="custom"></item>
     </string-array>
+	<string-array name="testTargetUserAgent">
+        <item name="ios">CaptiveNetworkSupport-209.39 wispr</item>
+        <item name="wp">WifiHotspot</item>
+        <item name="custom"></item>
+        </string-array>
     <string-array name="testTargetResponse">
         <item name="ios">&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;</item>
         <item name="wp">Microsoft NCSI</item>

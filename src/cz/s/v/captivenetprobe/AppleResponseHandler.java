@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.s.v.captivesimulator;
+package cz.s.v.captivenetprobe;
 
 import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import cz.s.v.captivenetprobe.R;
 import java.util.HashMap;
 import java.util.Map;
 
