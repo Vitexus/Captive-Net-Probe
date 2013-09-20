@@ -29,8 +29,12 @@ public class TestCaptiveNetwork extends Activity {
      */
     public int testTryResult = -1;
 
-    public String testUrl = "http://www.apple.com/library/test/success.html";
-//            testUrl = "http://v.s.cz/success.html";
+    public String probeUrl = "";
+    public String probeUserAgent = "";
+    public String probeSuccessResponse = "";
+    
+    
+    
     private static final int RESULT_SETTINGS = 1;
 
     /**
@@ -111,10 +115,10 @@ public class TestCaptiveNetwork extends Activity {
     /**
      * Otestuje Captive capability na síti
      */
-    public void performAppleHit() {
+    public void performProbeHit() {
         AsyncHttpClient firstTryClient = new AsyncHttpClient();
-        firstTryClient.setUserAgent("CaptiveNetworkSupport-209.39 wispr");
-        firstTryClient.get(testUrl, new AppleResponseHandler(this));
+        firstTryClient.setUserAgent(probeUserAgent);
+        firstTryClient.get(probeUrl, new ProbeResponseHandler(this));
     }
 
     /**
@@ -125,7 +129,7 @@ public class TestCaptiveNetwork extends Activity {
     private boolean performAppleTest() {
         boolean result = true;
 
-        performAppleHit();
+        performProbeHit();
 
         return result;
     }
@@ -155,6 +159,10 @@ public class TestCaptiveNetwork extends Activity {
                 }
             }
 
+            probeSuccessResponse = testResponses[testTypeIndex];
+            probeUrl = testURLs[testTypeIndex];
+            probeUserAgent = testUserAgents[testTypeIndex];
+            
             builder.append("Test Type: " + testTypes[testTypeIndex]);
             builder.append("\nUser Agent: " + testUserAgents[testTypeIndex]);
             builder.append("\nTest Target: " + testURLs[testTypeIndex]);

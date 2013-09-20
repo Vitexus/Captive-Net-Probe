@@ -22,36 +22,12 @@ import java.util.Map;
  *
  * @author vitex
  */
-public class AppleResponseHandler extends AsyncHttpResponseHandler {
-
-    /**
-     * Adresa testu
-     */
-    public String testUrl = "http://www.apple.com/library/test/success.html";
-
-    /**
-     * Správná SSL odpověď
-     */
-    String responseSuccessAppleSSL = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 3.2//EN\">\n"
-            + "<HTML>\n"
-            + "<HEAD>\n"
-            + "	<TITLE>Success</TITLE>\n"
-            + "</HEAD>\n"
-            + "<BODY>\n"
-            + "Success\n"
-            + "</BODY>\n"
-            + "</HTML>\n";
-
-    /**
-     * Správná SSL odpověď
-     */
-    String responseSuccessApple = "<HTML><HEAD><TITLE>Success</TITLE></HEAD><BODY>Success</BODY></HTML>";
-
-    public String responseBody = "";
+public class ProbeResponseHandler extends AsyncHttpResponseHandler {
+   public String responseBody = "";
 
     private TestCaptiveNetwork appContext;
 
-    public AppleResponseHandler(TestCaptiveNetwork context) {
+    public ProbeResponseHandler(TestCaptiveNetwork context) {
         appContext = context;
     }
 
@@ -75,13 +51,9 @@ public class AppleResponseHandler extends AsyncHttpResponseHandler {
 
         responseBody = response;
 
-        if (response.equals(responseSuccessApple)) {
+        if (response.equals(appContext.probeSuccessResponse)) {
             appContext.testTryResult = 2;
-
         } else {
-            response.length();
-            responseSuccessApple.length();
-
             appContext.testTryResult = 1;
         }
 
@@ -126,13 +98,13 @@ public class AppleResponseHandler extends AsyncHttpResponseHandler {
         if (appContext.testTryResult == 2) {
             statusIcon.setIcon(R.drawable.ic_state_online);
             resumeText.setText("Online :)");
-            myWebView.loadUrl(testUrl, noCacheHeaders);
+            myWebView.loadUrl(appContext.probeUrl, noCacheHeaders);
         }
 
         if (appContext.testTryResult == 1) {
             statusIcon.setIcon(R.drawable.ic_state_blocked);
             resumeText.setText("Blocked :|");
-            myWebView.loadUrl(testUrl, noCacheHeaders);
+            myWebView.loadUrl(appContext.probeUrl, noCacheHeaders);
 
         }
 
@@ -157,7 +129,7 @@ public class AppleResponseHandler extends AsyncHttpResponseHandler {
 
         @Override
         public void onLoadResource(WebView view, String url) {
-            if (url.equals(appContext.testUrl)) {
+            if (url.equals(appContext.probeUrl)) {
                 appContext.testTryNumber++;
             }
             TextView text = (TextView) appContext.findViewById(R.id.result);
@@ -172,7 +144,7 @@ public class AppleResponseHandler extends AsyncHttpResponseHandler {
 
         @Override
         public void onPageFinished(WebView view, String url) {
-            if (url.equals(appContext.testUrl)) {
+            if (url.equals(appContext.probeUrl)) {
                 Toast.makeText(appContext, "Page Loaded ... #" + appContext.testTryNumber, Toast.LENGTH_SHORT).show();
 
                 /*            
@@ -183,8 +155,8 @@ public class AppleResponseHandler extends AsyncHttpResponseHandler {
                 if (appContext.testTryResult == 1) { //Was BLOCKED - try again
                     if (appContext.testTryNumber == 2) {
                         AsyncHttpClient secondTryClient = new AsyncHttpClient();
-                        secondTryClient.setUserAgent("CaptiveNetworkSupport-209.39 wispr" + appContext.testTryNumber);
-                        secondTryClient.get(testUrl, new AppleResponseHandler(appContext));
+                        secondTryClient.setUserAgent(appContext.probeUserAgent);
+                        secondTryClient.get(appContext.probeUrl, new ProbeResponseHandler(appContext));
                     }
                 }
 
