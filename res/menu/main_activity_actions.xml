@@ -1,10 +1,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <!-- Search, should appear as action button -->
+
+    <item android:id="@+id/action_icon"
+          android:text="status" 
+          android:icon="@drawable/ic_state_unknown"
+          android:title="@string/action_unknown"
+          android:showAsAction="always" />
+    
     <item android:id="@+id/action_refresh"
           android:icon="@drawable/ic_action_refresh"
           android:title="@string/action_refresh"
-          android:showAsAction="ifRoom" />
+          android:width="50px"
+          android:showAsAction="always" />
     <!-- Settings, should always be in the overflow -->
+    
     <item android:id="@+id/action_settings"
           android:title="@string/action_settings"
           android:showAsAction="never" />
